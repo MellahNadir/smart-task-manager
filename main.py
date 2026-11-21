@@ -33,22 +33,29 @@ def main():
                     status = "Done" if task.is_completed else "Pending"
                     print(f"[{task.task_id}] {task.title} | {task.category} | {task.priority} | Due: {task.due_date} | {status}")
         elif choice == "3":
-            task_id = int(input("Enter task ID to complete: "))
-            if manager.complete_task(task_id):
-                print("Task marked as completed!")
-            else:
-                print("Task not found.")
-       elif choice == "4":
-            task_id = int(input("Enter task ID to delete: "))
-            if manager.delete_task(task_id):
-                print("Task deleted!")
-            else:
-                print("Task not found.")
-                       
+            try:
+                task_id = int(input("Enter task ID to complete: "))
+                if manager.complete_task(task_id):
+                    print("Task marked as completed!")
+                else:
+                    print("Task not found.")
+            except ValueError:
+                print("Please enter a valid number.")
+        elif choice == "4":
+            try:
+                task_id = int(input("Enter task ID to delete: "))
+                if manager.delete_task(task_id):
+                    print("Task deleted!")
+                else:
+                    print("Task not found.")
+            except ValueError:
+                print("Please enter a valid number.")
         elif choice == "5":
             print("Goodbye!")
             break
         else:
             print("Invalid choice, please try again.")
+
+
 if __name__ == "__main__":
     main()
